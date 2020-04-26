@@ -1,6 +1,7 @@
 package com.niit.medicure.model;
 
 import java.nio.charset.StandardCharsets;
+import java.sql.Date;
 import java.util.Base64;
 
 import javax.persistence.Column;
@@ -27,8 +28,15 @@ public class Patient {
 	@Column(name="phone_Num")
 	private int phoneNum;
 	
+	@Column(name="gender")
+	String gender;
 	
-
+	@Column(name="blood_Group")
+	String bloodGroup;
+	
+	@Column(name="dob")
+	Date dob;
+	
 	@Column(name="email")
 	private String email;
 	
@@ -47,6 +55,18 @@ public class Patient {
 
 	public void setPatientId(Integer patientId) {
 		this.patientId = patientId;
+	}
+
+
+
+	public Date getDob() {
+		return dob;
+	}
+
+
+
+	public void setDob(Date dob) {
+		this.dob = dob;
 	}
 
 
@@ -86,12 +106,44 @@ public class Patient {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	
+
+	public String getGender() {
+		return gender;
+	}
+
+
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+
+
+	public String getBloodGroup() {
+		return bloodGroup;
+	}
+
+
+
+	public void setBloodGroup(String bloodGroup) {
+		this.bloodGroup = bloodGroup;
+	}
+
+
 
 	@Override
 	public String toString() {
-		return "Patient [id=" + patientId + ", name=" + name + ", password=" + password + ", phoneNum=" + phoneNum + ", email="
-				+ email + "]";
+		return "Patient [patientId=" + patientId + ", name=" + name + ", password=" + password + ", phoneNum="
+				+ phoneNum + ", gender=" + gender + ", bloodGroup=" + bloodGroup + ", dob=" + dob + ", email=" + email
+				+ "]";
 	}
+
+
+
+	
+
 
 	
 

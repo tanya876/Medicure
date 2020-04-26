@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Appointment.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">LogRegControllerTest (20 Apr, 2020 6:35:27 PM)</a> &gt; <a href="../../index.html" class="el_group">MedicureConsultancy</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.niit.medicure.model</a> &gt; <span class="el_source">Appointment.java</span></div><h1>Appointment.java</h1><pre class="source lang-java linenums">package com.niit.medicure.model;
+
+import java.sql.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name=&quot;appointment&quot;)
+public class Appointment {
+
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name=&quot;app_id&quot;)
+	@Id
+	int app_id;
+	
+	@Column(name=&quot;id&quot;)
+	Integer patientId;
+	@Column(name=&quot;d_id&quot;)
+	Integer doctorid;
+	String doctorname;
+	String patientname;
+	String doctoraddress;
+	String specialist;
+	String date1;
+	String date2;
+	@Column(name=&quot;selecteddate&quot;)
+	String selectedDate;
+	String status;
+	String payment;
+	
+	
+	public Appointment() {
+<span class="fc" id="L38">		super();</span>
+		// TODO Auto-generated constructor stub
+<span class="fc" id="L40">	}</span>
+	public int getApp_id() {
+<span class="nc" id="L42">		return app_id;</span>
+	}
+	public void setApp_id(int app_id) {
+<span class="fc" id="L45">		this.app_id = app_id;</span>
+<span class="fc" id="L46">	}</span>
+	
+	
+	public Integer getPatientId() {
+<span class="nc" id="L50">		return patientId;</span>
+	}
+	public void setPatientId(Integer patientId) {
+<span class="nc" id="L53">		this.patientId = patientId;</span>
+<span class="nc" id="L54">	}</span>
+	
+	public String getPayment() {
+<span class="nc" id="L57">		return payment;</span>
+	}
+	public void setPayment(String payment) {
+<span class="nc" id="L60">		this.payment = payment;</span>
+<span class="nc" id="L61">	}</span>
+	public Integer getDoctorid() {
+<span class="nc" id="L63">		return doctorid;</span>
+	}
+	public void setDoctorid(Integer doctorid) {
+<span class="nc" id="L66">		this.doctorid = doctorid;</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">	if(this.doctorid==1) {</span>
+<span class="nc" id="L68">		setDoctorname(&quot;Dr. Satyendra Singh&quot;);</span>
+<span class="nc" id="L69">	}</span>
+	
+<span class="nc bnc" id="L71" title="All 2 branches missed.">	else if(this.doctorid==2) {</span>
+<span class="nc" id="L72">		setDoctorname(&quot;Dr. Pratik Mishra&quot;);</span>
+<span class="nc" id="L73">	}</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">	else if(this.doctorid==3) {</span>
+<span class="nc" id="L75">		setDoctorname(&quot;Dr. Ruby Kansal&quot;);</span>
+<span class="nc" id="L76">	}</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">	else if(this.doctorid==4) {</span>
+<span class="nc" id="L78">		setDoctorname(&quot;Dr. Divya Aggarwal&quot;);</span>
+	}
+<span class="nc" id="L80">	}</span>
+	public String getSpecialist() {
+<span class="nc" id="L82">		return specialist;</span>
+	}
+	public void setSpecialist(String specialist) {
+<span class="nc" id="L85">		this.specialist = specialist;</span>
+<span class="nc" id="L86">	}</span>
+	
+	public String getDate1() {
+<span class="nc" id="L89">		return date1;</span>
+	}
+	public void setDate1(String date1) {
+<span class="nc" id="L92">		this.date1 = date1;</span>
+<span class="nc" id="L93">	}</span>
+	public String getDate2() {
+<span class="nc" id="L95">		return date2;</span>
+	}
+	public void setDate2(String date2) {
+<span class="nc" id="L98">		this.date2 = date2;</span>
+<span class="nc" id="L99">	}</span>
+	public String getStatus() {
+<span class="nc" id="L101">		return status;</span>
+	}
+	public void setStatus(String status) {
+<span class="fc" id="L104">		this.status = status;</span>
+<span class="fc" id="L105">	}</span>
+	public String getDoctorname() {
+<span class="nc" id="L107">		return doctorname;</span>
+	}
+	public void setDoctorname(String doctorname) {
+<span class="nc" id="L110">		this.doctorname = doctorname;</span>
+<span class="nc" id="L111">	}</span>
+	public String getPatientname() {
+<span class="nc" id="L113">		return patientname;</span>
+	}
+	public void setPatientname(String patientname) {
+<span class="nc" id="L116">		this.patientname = patientname;</span>
+<span class="nc" id="L117">	}</span>
+	public String getDoctoraddress() {
+<span class="nc" id="L119">		return doctoraddress;</span>
+	}
+	public void setDoctoraddress(String doctoraddress) {
+<span class="nc" id="L122">		this.doctoraddress = doctoraddress;</span>
+<span class="nc" id="L123">	}</span>
+	public String getSelectedDate() {
+<span class="nc" id="L125">		return selectedDate;</span>
+	}
+	public void setSelectedDate(String selectedDate) {
+<span class="fc" id="L128">		this.selectedDate = selectedDate;</span>
+<span class="fc" id="L129">	}</span>
+	
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>LogRegControllerTest (20 Apr, 2020 6:35:27 PM)</div></body></html>

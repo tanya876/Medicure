@@ -6,86 +6,78 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Online Doctor Consultancy</title>
+<title>Medicure Consultancy</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+<link href="<c:url value='/resources/static/style/appointment-list1.css' />" rel="stylesheet">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <link href="<c:url value="/resources/static/style/bootstrap.min.css" />"
 rel="stylesheet">
-<link href="<c:url value="/resources/static/style/index.css" />"
- rel="stylesheet">
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="<c:url value="/resources/static/style/navbar.css" />"
+rel="stylesheet">
 <script src="<c:url value="/resources/static/js/jquery-3.3.0.min.js" />"></script>
 <script src="<c:url value="/resources/static/js/bootstrap.min.js" />"></script>
-<script src="<c:url value="/resources/static/js/app.js" />"></script>
-
 </head>
-<body background="<c:url value="/resources/static/images/slider3.jpg"/>"/>
+<body>
  <div class="fixed-header">
         <div class="container">
             <nav>
-               <a href="#">Doctor</a>
+             <img src="<c:url value="/resources/static/images/logo-edited.png"/>"/>
+             <a href="../loginUs/welcomePatient">Home</a>
+               <a href="../loginUs/doctor">Doctor</a>
                
-                <a href="#">Book Appointment</a>
+                <a href="../loginUs/bookapp">Book Appointment</a>
                <a href="#">Diagnostics</a>
                 <a href="#">Services</a>
                 <a href="../loginUs/logout" style="float:right">Logout! <%out.print(request.getSession().getAttribute("user")); %></a>
                 </nav>
                 </div>
              </div>
-<h1>Medicure Consultancy</h1>
-<div class="container">
-<div class="col-md-offset-2 col-md-7">
-<div class="panel panel-info">
-<div class="panel-heading">
-</div>
-<div class="panel-body">
-<form:form action="../patient/savePatient" cssClass="form-horizontal"
-method="post" modelAttribute="patient" onsubmit="return validate()">
 
-<!-- need to associate this data with patient id -->
-<form:hidden path="patientId" />
-
-<div class="form-group">
-<div class="fa fa-user icon"></div>
-<label for="Name" class="col-md-3 control-label" style="color:green;font-size:20px;">Patient
-Name</label>
-<div class="col-md-9">
-<form:input path="name" id="name" cssClass="form-control" />
-</div>
-</div>
-<div class="form-group">
-<div class="fa fa-key icon"></div>
-<label for="password" class="col-md-3 control-label" style="color:green;font-size:20px;">Password</label>
-<div class="col-md-9">
-<form:password path="password" id="password" cssClass="form-control"/>
-</div>
-</div>
-
-<div class="form-group">
-<div class="fa fa-mobile icon"></div>
-<label for="phonenum" class="col-md-3 control-label" style="color:green;font-size:20px;">Phone Number</label>
-<div class="col-md-9">
-<form:input path="phoneNum" id="phoneNum" cssClass="form-control"/>
-</div>
-</div>
-
-<div class="form-group">
-<div class="fa fa-envelope icon"></div>
-<label for="email" class="col-md-3 control-label" style="color:green;font-size:20px;">Email</label>
-<div class="col-md-9">
-<form:input path="email" id="" cssClass="form-control" />
-</div>
-</div>
-
-<div class="form-group">
-<!-- Button -->
-<div class="col-md-offset-3 col-md-9">
-<form:button cssClass="btn btn-primary">Submit</form:button>
-</div>
-</div>
-
-</form:form>
-</div>
-</div>
-</div>
-</div>
+ <div id="form_wrapper" style="height: 500px!important">
+        <div id="form_left">
+            <img src="<c:url value="/resources/static/images/loginicon.png"/>"/>
+        </div>
+        <form:form action="savePatient" cssClass="form-horizontal"
+method="post" modelAttribute="patient" onsubmit="return validate()" >
+        <div id="form_right">
+            <h1> Edit Details</h1>
+            <center><div class="input_container">
+                <i class="fas fa-user"></i>
+                <input   type="text" name="name" id="field_password" class='input_field' value="${patient.name}"/>
+            </div></center>
+            <center><div class="input_container">
+                <i class="fas fa-envelope"></i>
+                <input  type="email" name="email" id="field_email" class='input_field' value="${patient.email}"/>
+            </div></center>
+           
+             <center><div class="input_container">
+                <i class="fas fa-phone"></i>
+                <input  type="number"  name="phoneNum" id="field_password" class='input_field' value="${patient.phoneNum}"/>
+            </div></center>
+            <div style="display:none">
+             <center><div class="input_container">
+                <i class="fas fa-lock"></i>
+                <input  type="password" name="password" id="field_password" class='input_field' value="${patient.password}"/>
+            </div></center></div>
+           
+            <center><div style="color: red">${error}</div></center>
+            <center><input type="submit" value="Save" id='input_submit' class='input_field' style="width:40%" onclick="myalert()"></center>
+           </div>
+          </form:form>
+          </div>
+       
+     
+ 
 </body>
 </html>

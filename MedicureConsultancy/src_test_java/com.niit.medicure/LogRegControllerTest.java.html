@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>LogRegControllerTest.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">LogRegControllerTest (20 Apr, 2020 6:35:27 PM)</a> &gt; <a href="../../index.html" class="el_group">MedicureConsultancy</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">com.niit.medicure</a> &gt; <span class="el_source">LogRegControllerTest.java</span></div><h1>LogRegControllerTest.java</h1><pre class="source lang-java linenums">package com.niit.medicure;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+
+import com.niit.medicure.controller.LogRegController;
+import com.niit.medicure.model.Doctor;
+import com.niit.medicure.model.Patient;
+import com.niit.medicure.service.DoctorService;
+import com.niit.medicure.service.PatientService;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = { LogRegController.class})
+<span class="fc" id="L33">public class LogRegControllerTest {</span>
+
+	
+	@InjectMocks
+	LogRegController controller;
+
+	@MockBean
+	PatientService patientService;
+	@MockBean
+	DoctorService doctorService;
+	
+	@Spy
+	Model model;
+	@Spy
+	ModelMap modelMap;
+	@Spy
+	HttpSession ses;
+	@Spy
+	HttpServletRequest req;
+
+	@Before
+	public void init() {
+<span class="fc" id="L55">		MockitoAnnotations.initMocks(this);</span>
+<span class="fc" id="L56">	}</span>
+
+	
+	@Test
+	public void homeTest()
+	{
+<span class="fc" id="L62">	 assertEquals(controller.home(),&quot;index&quot;);	</span>
+<span class="fc" id="L63">	}</span>
+	
+	@Test
+	public void signUpTest()
+	{
+<span class="fc" id="L68">		assertEquals(controller.signup(model),&quot;patient-form&quot;);</span>
+<span class="fc" id="L69">	}</span>
+	
+	@Test
+	public void loginDocTest() {
+<span class="fc" id="L73">		assertEquals(controller.loginDoc(model),&quot;patient-form&quot;);</span>
+<span class="fc" id="L74">	}</span>
+
+	@Test
+public void savePatient()
+{
+<span class="fc" id="L79">		Patient p=new Patient();</span>
+<span class="fc" id="L80">	assertEquals(controller.savePatient(p, model), &quot;redirect:../login&quot;);</span>
+<span class="fc" id="L81">	verify(patientService,times(1)).save(p);</span>
+<span class="fc" id="L82">}</span>
+	
+	@Test
+	public void loginTest() {
+<span class="fc" id="L86">		assertEquals(controller.login(model),&quot;login-us&quot;);</span>
+<span class="fc" id="L87">	}</span>
+	
+	
+	@Test
+	public void loginUserDoctorAndPatientBothNull()
+	{
+<span class="fc" id="L93">		String email=&quot;satyam@gmail.com&quot;;</span>
+<span class="fc" id="L94">		String pass=&quot;12345&quot;;</span>
+<span class="fc" id="L95">		when(req.getSession()).thenReturn(ses);</span>
+<span class="fc" id="L96">		when(req.getParameter(&quot;email&quot;)).thenReturn(email);</span>
+<span class="fc" id="L97">		when(req.getParameter(&quot;password&quot;)).thenReturn(pass);</span>
+<span class="fc" id="L98">		when(patientService.findByEmail(email)).thenReturn(null);</span>
+
+<span class="fc" id="L100">		when(doctorService.findByEmail(email)).thenReturn(null);</span>
+		
+		
+<span class="fc" id="L103">	assertEquals(controller.loginUser(req, modelMap, new Patient(), new Doctor()), &quot;login-us&quot;);	</span>
+<span class="fc" id="L104">	}</span>
+	
+	@Test
+	public void loginUserDoctorAndPatientBothNullFailTest()
+	{
+<span class="fc" id="L109">		String email=&quot;satyam@gmail.com&quot;;</span>
+<span class="fc" id="L110">		String pass=&quot;12345&quot;;</span>
+<span class="fc" id="L111">		when(req.getSession()).thenReturn(ses);</span>
+<span class="fc" id="L112">		when(req.getParameter(&quot;email&quot;)).thenReturn(email);</span>
+<span class="fc" id="L113">		when(req.getParameter(&quot;password&quot;)).thenReturn(pass);</span>
+<span class="fc" id="L114">		when(patientService.findByEmail(email)).thenReturn(new Patient());</span>
+
+<span class="fc" id="L116">		when(doctorService.findByEmail(email)).thenReturn(new Doctor());</span>
+		
+		
+<span class="fc" id="L119">	assertEquals(controller.loginUser(req, modelMap, new Patient(), new Doctor()), &quot;login-us&quot;);	</span>
+<span class="fc" id="L120">	}</span>
+	@Test
+	public void loginUserDoctorTest()
+	{
+<span class="fc" id="L124">		String email=&quot;satyam@gmail.com&quot;;</span>
+<span class="fc" id="L125">		String pass=&quot;MTIzNDU=&quot;;</span>
+<span class="fc" id="L126">		Doctor d=new Doctor();</span>
+<span class="fc" id="L127">		d.setEmail(email);</span>
+<span class="fc" id="L128">		d.setPassword(&quot;12345&quot;);</span>
+		
+<span class="fc" id="L130">		when(req.getSession()).thenReturn(ses);</span>
+<span class="fc" id="L131">		when(req.getParameter(&quot;email&quot;)).thenReturn(email);</span>
+<span class="fc" id="L132">		when(req.getParameter(&quot;password&quot;)).thenReturn(pass);</span>
+<span class="fc" id="L133">		when(patientService.findByEmail(email)).thenReturn(null);</span>
+
+<span class="fc" id="L135">		when(doctorService.findByEmail(email)).thenReturn(d);</span>
+		
+		
+<span class="fc" id="L138">	assertEquals(controller.loginUser(req, modelMap, new Patient(), new Doctor()), &quot;welcome-doctor&quot;);	</span>
+	
+	
+<span class="fc" id="L141">	}</span>
+	
+	@Test
+	public void UserDoctorFailTest() {
+<span class="fc" id="L145">		Doctor d=new Doctor();</span>
+<span class="fc" id="L146">		String email=&quot;tanya@mail.com&quot;;</span>
+<span class="fc" id="L147">		String pass=&quot;MTIzNDU=&quot;;</span>
+<span class="fc" id="L148">		d.setEmail(email);</span>
+<span class="fc" id="L149">		d.setPassword(&quot;123&quot;);</span>
+	
+<span class="fc" id="L151">		when(req.getSession()).thenReturn(ses);</span>
+<span class="fc" id="L152">		when(req.getParameter(&quot;email&quot;)).thenReturn(email);</span>
+<span class="fc" id="L153">		when(req.getParameter(&quot;password&quot;)).thenReturn(pass);</span>
+<span class="fc" id="L154">		when(patientService.findByEmail(email)).thenReturn(null);</span>
+
+<span class="fc" id="L156">		when(doctorService.findByEmail(email)).thenReturn(d);</span>
+<span class="fc" id="L157">		assertEquals(controller.loginUser(req, modelMap,new Patient(),new Doctor()),&quot;login-us&quot;);</span>
+<span class="fc" id="L158">	}</span>
+	
+	@Test
+	public void loginUserPatientTest()
+	{
+<span class="fc" id="L163">		String email=&quot;karan@gmail.com&quot;;</span>
+<span class="fc" id="L164">		String pass=&quot;k12&quot;;</span>
+<span class="fc" id="L165">		Patient p=new Patient();</span>
+<span class="fc" id="L166">		p.setEmail(email);</span>
+<span class="fc" id="L167">		p.setPassword(pass);</span>
+		
+<span class="fc" id="L169">		when(req.getSession()).thenReturn(ses);</span>
+<span class="fc" id="L170">		when(req.getParameter(&quot;email&quot;)).thenReturn(email);</span>
+<span class="fc" id="L171">		when(req.getParameter(&quot;password&quot;)).thenReturn(pass);</span>
+<span class="fc" id="L172">		when(patientService.findByEmail(email)).thenReturn(p);</span>
+
+<span class="fc" id="L174">		when(doctorService.findByEmail(email)).thenReturn(null);</span>
+		
+		
+<span class="fc" id="L177">	assertEquals(controller.loginUser(req, modelMap, new Patient(), new Doctor()), &quot;welcome&quot;);	</span>
+<span class="fc" id="L178">	}</span>
+	
+	@Test
+	public void loginUserPatientFailTest()
+	{
+<span class="fc" id="L183">		String email=&quot;karan@gmail.com&quot;;</span>
+<span class="fc" id="L184">		String pass=&quot;k16&quot;;</span>
+<span class="fc" id="L185">		Patient p=new Patient();</span>
+<span class="fc" id="L186">		p.setEmail(email);</span>
+<span class="fc" id="L187">		p.setPassword(&quot;k89&quot;);</span>
+		
+<span class="fc" id="L189">		when(req.getSession()).thenReturn(ses);</span>
+<span class="fc" id="L190">		when(req.getParameter(&quot;email&quot;)).thenReturn(email);</span>
+<span class="fc" id="L191">		when(req.getParameter(&quot;password&quot;)).thenReturn(pass);</span>
+<span class="fc" id="L192">		when(patientService.findByEmail(email)).thenReturn(p);</span>
+
+<span class="fc" id="L194">		when(doctorService.findByEmail(email)).thenReturn(null);</span>
+		
+		
+<span class="fc" id="L197">	assertEquals(controller.loginUser(req, modelMap, new Patient(), new Doctor()), &quot;login-us&quot;);	</span>
+<span class="fc" id="L198">	}</span>
+	
+	@Test
+	public void listTest()
+	{
+		
+<span class="fc" id="L204">		when(patientService.listAll()).thenReturn(new ArrayList&lt;Patient&gt;());</span>
+<span class="fc" id="L205">		when(doctorService.listAll()).thenReturn(new ArrayList&lt;Doctor&gt;());</span>
+<span class="fc" id="L206">		assertEquals(controller.list(modelMap), &quot;list&quot;);</span>
+<span class="fc" id="L207">	}</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>LogRegControllerTest (20 Apr, 2020 6:35:27 PM)</div></body></html>

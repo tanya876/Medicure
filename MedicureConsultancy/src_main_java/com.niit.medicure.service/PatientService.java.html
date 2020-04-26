@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>PatientService.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">LogRegControllerTest (20 Apr, 2020 6:35:27 PM)</a> &gt; <a href="../../index.html" class="el_group">MedicureConsultancy</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.niit.medicure.service</a> &gt; <span class="el_source">PatientService.java</span></div><h1>PatientService.java</h1><pre class="source lang-java linenums">package com.niit.medicure.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+
+import com.niit.medicure.model.Patient;
+import com.niit.medicure.repository.PatientRepository;
+import com.niit.medicure.repository.UserRepository;
+
+
+
+@Service
+@Transactional
+<span class="fc" id="L19">public class PatientService {</span>
+	@Autowired
+	private PatientRepository repo;
+	@Autowired
+	private UserRepository uRepo;
+	
+	public void save(Patient thePat) {
+<span class="fc" id="L26">		repo.save(thePat);</span>
+<span class="fc" id="L27">		}</span>
+	
+	public Patient get(int patientId) 
+	{
+<span class="fc" id="L31">		return repo.findByPatientId(patientId);</span>
+		}
+	
+	public Patient findByEmail(String email) {
+<span class="fc" id="L35">		return uRepo.findByEmail(email);</span>
+	}
+	
+	public List&lt;Patient&gt; listAll()
+<span class="fc" id="L39">	{return repo.findAll();}</span>
+	
+
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>LogRegControllerTest (20 Apr, 2020 6:35:27 PM)</div></body></html>

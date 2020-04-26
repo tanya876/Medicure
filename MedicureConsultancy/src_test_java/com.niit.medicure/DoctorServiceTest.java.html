@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>DoctorServiceTest.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">LogRegControllerTest (20 Apr, 2020 6:35:27 PM)</a> &gt; <a href="../../index.html" class="el_group">MedicureConsultancy</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">com.niit.medicure</a> &gt; <span class="el_source">DoctorServiceTest.java</span></div><h1>DoctorServiceTest.java</h1><pre class="source lang-java linenums">package com.niit.medicure;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import com.niit.medicure.model.Doctor;
+import com.niit.medicure.model.Patient;
+import com.niit.medicure.repository.DoctorRepository;
+import com.niit.medicure.repository.UserDocRepository;
+import com.niit.medicure.service.DoctorService;
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = { DoctorService.class })
+<span class="fc" id="L27">public class DoctorServiceTest {</span>
+	@InjectMocks
+	DoctorService service;
+	
+	@MockBean
+	DoctorRepository repo;
+	@MockBean
+	UserDocRepository uRepo;
+	@Before
+	public void init() {
+<span class="fc" id="L37">		MockitoAnnotations.initMocks(this);</span>
+<span class="fc" id="L38">	}</span>
+	@Test
+	public void saveTest() {
+<span class="fc" id="L41">		Doctor doct=new Doctor();</span>
+<span class="fc" id="L42">		service.save(doct);</span>
+<span class="fc" id="L43">		verify(repo,times(1)).save(doct);</span>
+<span class="fc" id="L44">	}</span>
+	@Test
+	public void getTest() {
+<span class="fc" id="L47">		Doctor doct=new Doctor();</span>
+<span class="fc" id="L48">		when(repo.findByDoctorid(1)).thenReturn(doct);</span>
+<span class="fc" id="L49">		assertEquals(service.get(1),doct);</span>
+<span class="fc" id="L50">	}</span>
+	
+	@Test
+	public void listAllTest() {
+<span class="fc" id="L54">		List&lt;Doctor&gt; doct=new ArrayList&lt;Doctor&gt;();</span>
+<span class="fc" id="L55">		when(repo.findAll()).thenReturn(new ArrayList&lt;Doctor&gt;());</span>
+<span class="fc" id="L56">		assertEquals(service.listAll(),doct);</span>
+<span class="fc" id="L57">	}</span>
+	@Test
+	public void findByEmailTest() {
+<span class="fc" id="L60">		Doctor doct=new Doctor();</span>
+<span class="fc" id="L61">		when(uRepo.findByEmail(&quot;pratik@mail.com&quot;)).thenReturn(doct);</span>
+<span class="fc" id="L62">		assertEquals(service.findByEmail(&quot;pratik@mail.com&quot;),doct);</span>
+<span class="fc" id="L63">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>LogRegControllerTest (20 Apr, 2020 6:35:27 PM)</div></body></html>

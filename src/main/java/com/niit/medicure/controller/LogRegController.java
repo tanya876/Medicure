@@ -28,6 +28,12 @@ public class LogRegController {
 	@Autowired
 	private DoctorService doctorService;
 	
+	@RequestMapping("/")
+	public String home() {
+		return "index";
+	}
+	
+	
 	@RequestMapping(value = "/patient/signup",method = {RequestMethod.GET,RequestMethod.POST})
 	public String signup(Model theModel)
 	{
@@ -76,48 +82,51 @@ public class LogRegController {
 	  
 	 
 	  @RequestMapping("/loginUs")
-	  public ModelAndView loginUser(HttpServletRequest req,@ModelAttribute("user") Patient patient,@ModelAttribute("user") Doctor doctor) {
+	  public String loginUser(HttpServletRequest req,ModelMap mav,@ModelAttribute("user") Patient patient,@ModelAttribute("user") Doctor doctor) {
 	  String email=req.getParameter("email");
 	  String pass=req.getParameter("password");
 	  String pass2=encryptPass(pass);
 	  StringTokenizer st = new StringTokenizer(email, "@");
 	  String s2 = st.nextToken();
 
-	  ModelAndView mav=null;
+	
 	
 	  Patient d = patientService.findByEmail(email);
 	  Doctor doc = doctorService.findByEmail(email);
 	 
-	  if(d==null & doc==null) {
-	  mav= new ModelAndView("login-us");
-	  mav.addObject("error", "User Doesn't Exists");
+	  if(d==null && doc==null) {
+	  
+	  mav.addAttribute("error", "User Doesn't Exists");
+	 return "login-us";
 	  }
 	  else if(d==null) {
 		  if((email.equals(doc.getEmail()) && pass.equals(doc.getPassword()))) {
 			  req.getSession().setAttribute("user",s2);
 			  req.getSession().setAttribute("doctor", doc);
 			  
-			  mav = new ModelAndView("welcome-doctor");
+			
+			  return "welcome-doctor";
 		  }
 		  else {
-			  mav= new ModelAndView("login-us");
-			  mav.addObject("error", "Invalid Username or Password");
+			  mav.addAttribute("error", "Invalid Username or Password");
+			  return "login-us";
+			 
 		  }
 		  }
 	else if(doc==null) {
 			  if((email.equals(d.getEmail()) && pass2.equals(d.getPassword()))) {
 				  req.getSession().setAttribute("user",s2);
 				  req.getSession().setAttribute("patient", d);
-				  mav = new ModelAndView("welcome");
+				  return "welcome";
 				  
 			  }
 			  else {
-				  mav= new ModelAndView("login-us");
-				  mav.addObject("error", "Invalid Username or Password");
+				  mav.addAttribute("error", "Invalid Username or Password");
+				  return "login-us";
 			  }
 		  }
 
-	  return mav;
+	  return "login-us";
 	  }
 	  
 	  

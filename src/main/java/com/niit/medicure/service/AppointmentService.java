@@ -20,8 +20,8 @@ public class AppointmentService {
 	public void save(Appointment app) {
 		apprepo.save(app);
 	}
-	public Appointment get(int app_id) {
-		return apprepo.findById(app_id).get();
+	public Appointment get(int appid) {
+		return apprepo.findById(appid).get();
 	}
 	public List<Appointment> findAllByPatientId(Integer patientId){
 		return apprepo.findAllByPatientId(patientId);
@@ -30,6 +30,18 @@ public class AppointmentService {
 	public List<Appointment> findAllByDoctorid(Integer doctorid){
 		return apprepo.findAllByDoctorid(doctorid);
 
+	}
+	
+	public List<Appointment> findAllByPatientIdAndDoctorid(Integer patientId,Integer doctorid)
+	{
+		return apprepo.findAllByPatientIdAndDoctorid(patientId, doctorid);
+	}
+	
+	public void delete(int id) {
+		apprepo.deleteById(id);
+	}
+	public Appointment findByAppid(int appid) {
+		return apprepo.findByAppid(appid);
 	}
 	
 	

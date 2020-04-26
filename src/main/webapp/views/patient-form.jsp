@@ -1,91 +1,128 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+    <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Online Doctor Consultancy</title>
+<title>Insert title here</title>
+
+ <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>#1 HTML Login Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+<link href="<c:url value='/resources/static/style/appointment-list1.css' />" rel="stylesheet">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <link href="<c:url value="/resources/static/style/bootstrap.min.css" />"
 rel="stylesheet">
-<link href="<c:url value="/resources/static/style/index.css" />"
- rel="stylesheet">
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="<c:url value="/resources/static/style/navbar.css" />"
+rel="stylesheet">
 <script src="<c:url value="/resources/static/js/jquery-3.3.0.min.js" />"></script>
 <script src="<c:url value="/resources/static/js/bootstrap.min.js" />"></script>
-<script src="<c:url value="/resources/static/js/app.js" />"></script>
-
 </head>
-<body background="<c:url value="/resources/static/images/slider3.jpg"/>"/>
- <div class="fixed-header">
+<body>
+<div class="fixed-header">
         <div class="container">
             <nav>
-               <a href="#">Doctor</a>
-                
-                <a href="#">Book Appointment</a>
-               <a href="#">Diagnostics</a>
-                <a href="#">Services</a>
-                </nav>
-                </div>
-             </div>
-
-<div class="container" style="background:grey; width:650px;margin:0px auto; padding-left:50px; padding-top:50px;">
-<div class="col-md-offset-2 col-md-7">
-<div class="panel panel-info">
-<div class="panel-heading">
-</div>
-<div class="panel-body">
-<form:form action="savePatient" cssClass="form-horizontal"
+             <img src="<c:url value="/resources/static/images/logo-edited.png"/>"/>
+               <a href="">Home</a>
+                <a href="appointment">Book Appointment</a>
+                 <a href="#">Doctors</a>
+           
+<a href="list">View Records</a>
+               <a href="patient/signup" class="w3-button w3-white w3-padding-large w3-large w3-margin-top" style="color:black;padding: 8px 10px!important;margin-top: 0px!important;margin-left: 80px;">SignUp</a>
+               <a href="/login" class="w3-button w3-white w3-padding-large w3-large w3-margin-top" style="color:black;padding: 8px 10px!important;margin-top: 0px!important;margin-left: 5px;">Login</a>
+               
+                <!--  <a href="login" class="login">Login</a>-->
+               
+            </nav>
+        </div>
+    </div>
+   
+   
+   
+<div id="form_wrapper" style="height: 600px!important;
+    margin-bottom: 10px;margin-top: 120px">
+        <div id="form_left">
+            <img src="<c:url value="/resources/static/images/loginicon.png"/>" style="  margin-top: -57px!important;"/>
+        </div>
+        <form:form action="savePatient" cssClass="form-horizontal"
 method="post" modelAttribute="patient" onsubmit="return validate()">
 
-<!-- need to associate this data with patient id -->
-<form:hidden path="patientId" />
+        <div id="form_right" style="margin-top: -43px;">
+            <h1>Sign Up</h1>
+            <center><div class="input_container">
+                <i class="fas fa-user"></i>
+                <input  placeholder="Name" type="text" name="name" id="field_password" class='input_field'/>
+            </div></center>
+            <center><div class="input_container">
+                <i class="fas fa-envelope"></i>
+                <input placeholder="Email" type="email" name="email" id="field_email" class='input_field'/>
+            </div></center>
+           
+             <center><div class="input_container">
+                <i class="fas fa-tty"></i>
+                <input placeholder="Phone Number" type="text"  name="phoneNum" id="field_password" class='input_field'/>
+            </div></center>
+            
+             <center><div class="input_container">
+                <i class="fas fa-lock"></i>
+                <input  placeholder="Password" type="password" name="password" id="field_password" class='input_field'/>
+            </div></center>
+             <center><div class="input_container">
+                <i class="fas fa-user-friends"></i>
+               <select  placeholder="Gender" tye="text" id="gender" name="gender" class='input_field'/>
 
-<div class="form-group" style="padding:20px">
-<div class="fa fa-user icon">
-<label for="Name" style="color:black">Patient Name</label>
-<div class="col-md-9">
-<form:input path="name" id="name" cssClass="form-control" style="width:500px;"/>
-</div>
-</div>
-</div>
-<div class="form-group"  style="padding:20px">
-<div class="fa fa-key icon">
-<label for="password" class="col-md-3 control-label" style="color:black">Password</label>
-<div class="col-md-9">
-<form:password path="password" id="password" cssClass="form-control" style="width:500px;"/>
-</div>
-</div>
-</div>
-<div class="form-group"  style="padding:20px">
-<div class="fa fa-mobile icon">
-<label for="phonenum" class="col-md-3 control-label" style="color:black">Phone Number</label>
-<div class="col-md-9">
-<form:input path="phoneNum" id="phoneNum" cssClass="form-control" style="width:500px;"/>
-</div>
-</div>
-</div>
-<div class="form-group"  style="padding:20px">
-<div class="fa fa-envelope icon">
-<label for="email" class="col-md-3 control-label" style="color:black">Email</label>
-<div class="col-md-9">
-<form:input path="email" id="" cssClass="form-control" style="width:500px;"/>
-</div>
-</div>
-</div>
+            <option value="select">Select Your Gender</option>
+            <option value="Male">Male</option>
+           
+            <option value="Female">Female</option>
+            </select>
+            </div></center>
+            
+              <center><div class="input_container">
+                <i class="far fa-calendar-alt"></i>
+                <input  placeholder="Date of Birth" type="date" name="dob" id="dob" class='input_field'/>
+            </div></center>
+            
+               <center><div class="input_container">
+                <i class="	fas fa-burn"></i>
+               <select  placeholder="Blood Group" tye="text" id="bloodGroup" name="bloodGroup" class='input_field'/>
 
-<div class="form-group">
-<!-- Button -->
-<div class="col-md-offset-3 col-md-9">
-<form:button cssClass="btn btn-primary" style="align:center;">Submit</form:button>
-</div>
-</div>
+            <option value="select">Select Blood Group</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+             <option value="B+">B+</option>
+              <option value="B-">B-</option>
+               <option value="O+">O+</option>
+                <option value="O-">O-</option>
+                 <option value="AB+">AB+</option>
+                 
+                  <option value="AB-">AB-</option>
+                  
+          
+            </select>
+            </div></center>
+         
+            <center><div style="color: red">${error}</div></center>
+            <center><input type="submit" value="Sign Up" id='input_submit' class='input_field' style="width:40%" onclick="myalert()"></center>
+            <!-- <span>Forgot <a href="#"> Username / Password ?</a></span>-->
+            <!-- <span id='create_account'>
+                <a href="#">Create your account &#x27A1; </a>
+            </span>-->
+        </div>
+        </form:form>
+    </div>
 
-</form:form>
-</div>
-</div>
-</div>
-</div>
 </body>
 </html>

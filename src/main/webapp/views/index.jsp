@@ -6,11 +6,13 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<title>Medicure Consultancy</title>
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link href="<c:url value="/resources/static/style/bootstrap.min.css" />"
 rel="stylesheet">
 <link href="<c:url value="/resources/static/style/index.css" />"
@@ -39,6 +41,10 @@ body, html {
 .w3-bar .w3-button {
   padding: 16px;
 }
+
+nav a{
+    padding: 7px 15px!important;
+    }
 </style>
 
 </head>
@@ -46,12 +52,12 @@ body, html {
     <div class="fixed-header">
         <div class="container">
             <nav>
-             
-               <a href="">Home</a>
-                <a href="../appointment">Book Appointment</a>
-                 <a href="#">Doctors</a>
-               <a href="diagnostic">About Us</a>
-                <a href="#">Contact Us</a>
+             <img src="<c:url value="/resources/static/images/logo-edited.png"/>"/>
+               <a href="/">Home</a>
+                 <a href="../loginUs/doctor">Doctors</a>
+                 <a href="../login">Book Appointment</a>
+               <a href="diagnostic">Diagnostic</a>
+                <a href="#">Services</a>
            
 <a href="../list">View Records</a>
                <a href="../patient/signup" class="signup">SignUp</a>
@@ -77,7 +83,10 @@ body, html {
     <span class="w3-jumbo w3-hide-small" style="color:black">Medicure Consultancy</span><br>
     <span class="w3-xxlarge w3-hide-large w3-hide-medium" style="color:black">Medicure Consultancy</span><br>
     <span class="w3-large" style="color:black">Smile, it lets your teeth breathe</span>
-    <p><a href="#about" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off" style="color:black">Book Appointment</a></p>
+   <p>
+    <a href="#about" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off" style="color:black">
+    Book Appointment</a>
+    </p>
   </div>
   <div class="w3-display-bottomleft w3-text-grey w3-large" style="padding:24px 48px">
     <i class="fa fa-facebook-official w3-hover-opacity"></i>
@@ -131,7 +140,9 @@ body, html {
           <p>Dr. Satyendra Singh is one of the best physicians in the area and has 9 years of experience.
            He has completed his MBBS from Era Lucknow Medical College, Lucknow and CCDM from
            Apollo Hospitals. </p>
-          <p><button class="w3-button w3-light-grey w3-block"><!-- <i class="fa fa-envelope"></i> --> Book Appointment</button></p>
+           <p><b>ADDRESS: 20,H-Block,Saket,Delhi</b></p>
+            <a href="../login" class="w3-button w3-light-grey w3-block">Book Appointment</a>
+          
         </div>
       </div>
     </div>
@@ -144,7 +155,8 @@ body, html {
           <center><p class="w3-opacity">General Physician</p></center>
           <p>Dr. Pratik Mishra is a General Physician and has a professional experience of 5 years. He completed his MBBS from R.G. Kar Medical
           College, Kolkata  and PGCC (Diabetes) and HYUY.</p>
-          <p><button class="w3-button w3-light-grey w3-block"> Book Appointment</button></p>
+            <p><b>ADDRESS:- 1/20,C-Block,Botanical Garden,Noida</b></p>
+          <a href="../login" class="w3-button w3-light-grey w3-block">Book Appointment</a>
         </div>
       </div>
     </div>
@@ -157,7 +169,8 @@ body, html {
           <center><p class="w3-opacity">Pediatrician</p></center>
           <p>Dr. Ruby Kansal is a Pediatrician and has a professional experience of 5 years.She completed her MBBS from Kasturba Medical College
           in 2008 and MD - Pediatrics from Kasturba Medical College.</p>
-          <p><button class="w3-button w3-light-grey w3-block">Book Appointment</button></p>
+            <p><b>ADDRESS:- 10/1,H-Block,Sector-62,Noida</b></p>
+         <a href="../login" class="w3-button w3-light-grey w3-block">Book Appointment</a>
         </div>
       </div>
     </div>
@@ -170,7 +183,8 @@ body, html {
           <center><p class="w3-opacity">Pediatrician</p></center>
           <p>Dr. Divya Aggarwal is a Pediatrician and has a professional experience of 12 years. She completed her MBBS from Kasturba Medical College
           in 2008 and MD - Pediatrics from Kasturba Medical College in 2011. </p>
-          <p><button class="w3-button w3-light-grey w3-block">Book Appointment</button></p>
+            <p><b>ADDRESS:- 1069,H-Block,Niti Khand,Indirapuram</b></p>
+          <a href="../login" class="w3-button w3-light-grey w3-block">Book Appointment</a>
         </div>
       </div>
     </div>

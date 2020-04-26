@@ -22,10 +22,16 @@ public class DoctorService {
 	public Doctor findByEmail(String email) {
 		return uRepo. findByEmail(email);
 	}
-	
+	public void save(Doctor doctor) {
+		repo.save(doctor);
+		}
 	public List<Doctor> listAll()
 	{
 		return repo.findAll();
 		}
 
+	public Doctor get(int doctorid) 
+	{
+		return repo.findByDoctorid(doctorid);
+		}
 }

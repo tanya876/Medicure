@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>MediRestController.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">LogRegControllerTest (20 Apr, 2020 6:35:27 PM)</a> &gt; <a href="../../index.html" class="el_group">MedicureConsultancy</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.niit.medicure.rest</a> &gt; <span class="el_source">MediRestController.java</span></div><h1>MediRestController.java</h1><pre class="source lang-java linenums">package com.niit.medicure.rest;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.niit.medicure.exception.ResourceNotFoundException;
+import com.niit.medicure.model.Doctor;
+import com.niit.medicure.model.Patient;
+import com.niit.medicure.repository.DoctorRepository;
+import com.niit.medicure.repository.PatientRepository;
+
+@CrossOrigin(origins=&quot;http://localhost:4200&quot;)
+@RestController
+
+@RequestMapping(value=&quot;/api&quot;)
+<span class="nc" id="L30">public class MediRestController {</span>
+
+@Autowired
+public DoctorRepository arepo;
+@Autowired
+public PatientRepository prepo;
+
+@PostMapping(&quot;/admin&quot;)
+public Doctor saveProduct(@Valid @RequestBody Doctor doctor) {  
+<span class="nc" id="L39">return arepo.save(doctor)  ;</span>
+             
+}  
+@GetMapping(&quot;/admin/doctor&quot;)  
+    public List&lt;Doctor&gt; getAllDoctors() {  
+<span class="nc" id="L44">         return arepo.findAll();    </span>
+    }  
+@DeleteMapping(&quot;/admin/{doctorid}&quot;)
+public Map&lt;String, Boolean&gt; deleteDoctor(@PathVariable(value = &quot;doctorid&quot;) int doctorid)
+throws ResourceNotFoundException{
+<span class="nc" id="L49">Doctor doctor = arepo.findById(doctorid)</span>
+<span class="nc" id="L50">.orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Doctor not found for this id :: &quot; + doctorid));</span>
+<span class="nc" id="L51">    arepo.delete(doctor);</span>
+   
+<span class="nc" id="L53">    Map&lt;String, Boolean&gt; response = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L54">response.put(&quot;deleted&quot;, Boolean.TRUE);</span>
+<span class="nc" id="L55">return response;</span>
+}
+@GetMapping(&quot;/admin/patient&quot;)  
+    public List&lt;Patient&gt; getAllPatient() {  
+<span class="nc" id="L59">         return prepo.findAll();    </span>
+    }  
+@DeleteMapping(&quot;/admin/patient/{patientId}&quot;)
+public Map&lt;String, Boolean&gt; deletePatient(@PathVariable(value = &quot;patientId&quot;) int patientId)
+throws ResourceNotFoundException{
+<span class="nc" id="L64">Patient patient = prepo.findById(patientId)</span>
+<span class="nc" id="L65">.orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Patient not found for this id :: &quot; + patientId));</span>
+<span class="nc" id="L66">    prepo.delete(patient);</span>
+   
+<span class="nc" id="L68">    Map&lt;String, Boolean&gt; response = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L69">response.put(&quot;deleted&quot;, Boolean.TRUE);</span>
+<span class="nc" id="L70">return response;</span>
+}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>LogRegControllerTest (20 Apr, 2020 6:35:27 PM)</div></body></html>

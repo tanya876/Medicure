@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Doctor.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">LogRegControllerTest (20 Apr, 2020 6:35:27 PM)</a> &gt; <a href="../../index.html" class="el_group">MedicureConsultancy</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.niit.medicure.model</a> &gt; <span class="el_source">Doctor.java</span></div><h1>Doctor.java</h1><pre class="source lang-java linenums">package com.niit.medicure.model;
+
+import java.nio.charset.StandardCharsets;
+import java.sql.Date;
+import java.util.Base64;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name=&quot;doctor&quot;)
+public class Doctor {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name=&quot;d_id&quot;)
+	private Integer doctorid;
+
+	@Column(name=&quot;name&quot;)
+	private String  name;
+
+	@Column(name=&quot;password&quot;)
+	private String password;
+	
+	@Column(name=&quot;phone_Num&quot;)
+	private Long phoneNum;
+
+	@Column(name=&quot;email&quot;)
+	private String email;
+	
+	@Column(name=&quot;dob&quot;)
+	private Date dob;
+	
+	@Column(name=&quot;specialization&quot;)
+	private String specialization;
+
+	public Doctor() {
+<span class="fc" id="L41">		super();</span>
+<span class="fc" id="L42">	}</span>
+
+	
+	public Integer getDoctorid() {
+<span class="fc" id="L46">		return doctorid;</span>
+	}
+
+
+	public void setDoctorid(Integer doctorid) {
+<span class="fc" id="L51">		this.doctorid = doctorid;</span>
+<span class="fc" id="L52">	}</span>
+
+
+	public String getName() {
+<span class="nc" id="L56">		return name;</span>
+	}
+
+	public void setName(String name) {
+<span class="nc" id="L60">		this.name = name;</span>
+<span class="nc" id="L61">	}</span>
+
+	public String getPassword() {
+<span class="fc" id="L64">		return password;</span>
+	}
+
+	public void setPassword(String password) {
+<span class="fc" id="L68">		Base64.Encoder encoder = Base64.getEncoder();</span>
+<span class="fc" id="L69">		  String normalString = password;</span>
+<span class="fc" id="L70">		  String encodedString = encoder.encodeToString(</span>
+<span class="fc" id="L71">		     normalString.getBytes(StandardCharsets.UTF_8) );</span>
+<span class="fc" id="L72">		  this.password = encodedString;</span>
+<span class="fc" id="L73">	}</span>
+
+	public Long getPhoneNum() {
+<span class="nc" id="L76">		return phoneNum;</span>
+	}
+
+	public void setPhoneNum(Long phoneNum) {
+<span class="nc" id="L80">		this.phoneNum = phoneNum;</span>
+<span class="nc" id="L81">	}</span>
+
+	public String getEmail() {
+<span class="fc" id="L84">		return email;</span>
+	}
+
+	public void setEmail(String email) {
+<span class="fc" id="L88">		this.email = email;</span>
+<span class="fc" id="L89">	}</span>
+
+	public Date getDob() {
+<span class="nc" id="L92">		return dob;</span>
+	}
+
+	public void setDob(Date dob) {
+<span class="nc" id="L96">		this.dob = dob;</span>
+<span class="nc" id="L97">	}</span>
+
+	public String getSpecialization() {
+<span class="nc" id="L100">		return specialization;</span>
+	}
+
+	public void setSpecialization(String specialization) {
+<span class="nc" id="L104">		this.specialization = specialization;</span>
+<span class="nc" id="L105">	}</span>
+
+
+	@Override
+	public String toString() {
+<span class="nc" id="L110">		return &quot;Doctor [doctorId=&quot; + doctorid + &quot;, name=&quot; + name + &quot;, password=&quot; + password + &quot;, phoneNum=&quot; + phoneNum</span>
+<span class="nc" id="L111">				+ &quot;, email=&quot; + email + &quot;, dob=&quot; + dob + &quot;, specialization=&quot; + specialization + &quot;]&quot;;</span>
+	}
+
+	
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span>LogRegControllerTest (20 Apr, 2020 6:35:27 PM)</div></body></html>
